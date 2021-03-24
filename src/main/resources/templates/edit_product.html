@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit product</title>
+</head>
+<body>
+<form action="#" th:action="@{/save-edited-product}" th:object="${product}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" th:field="*{name}" id="name">
+    </div>
+
+    <div>
+        <label for="price">Price:</label>
+        <input type="text" th:field="*{price}" id="price">
+    </div>
+
+    <div>
+        <label for="description" >Description:</label>
+        <input type="text" th:field="*{description}" id="description">
+    </div>
+
+    <div>
+        <label for="name">Status</label>
+        <select th:field="*{status}">
+            <option th:each="status : ${T(com.example.webshop.enums.Status).values()}"
+                    th:value="${status}" th:text="${status}"></option>
+        </select>
+    </div>
+
+    <button  type="submit">Edit</button>
+</form>
+</body>
+</html>
