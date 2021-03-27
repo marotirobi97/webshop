@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -28,5 +29,5 @@ public class Orders {
     private Product product;
 
     @Column(name = "date_time")
-    private Date dateTime;
+    private LocalDateTime dateTime;
 }

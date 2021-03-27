@@ -22,8 +22,20 @@ public class Customer {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "confirmed_password")
+    private String confirmedPassword;
+
     @Column(name = "gender")
-    private Gender gender;
+    private String gender;
 
     @Column(name = "phone_number")
     private String phoneNumber;

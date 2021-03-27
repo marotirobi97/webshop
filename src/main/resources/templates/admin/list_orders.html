@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Orders</title>
+</head>
+<body>
+<button onclick="window.location.href='/index'">Back</button><br>
+<table>
+    <br>
+    <h3>List of Order</h3>
+    <br>
+    <thead>
+    <tr>
+        <th> Product </th>
+        <th> Customer </th>
+        <th> Date </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+        <td><span th:text="${order.product.getName()}" name="name">Product</span></td>
+        <td><span th:text="${order.customer.getName()}" name="name">Customer</span></td>
+        <td><span th:text="${#temporals.format(order.dateTime, 'dd-MM-yyyy HH:mm')}" name="name">Date</span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

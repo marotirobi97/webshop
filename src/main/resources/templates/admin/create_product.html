@@ -7,22 +7,30 @@
 </head>
 <body>
 <button onclick="window.location.href='/index'">Back</button><br>
+
 <form action="#" th:action="@{/save-new-product}" th:object="${product}" method="post">
     <div>
         <label for="name">Name:</label>
-        <input type="text" th:field="*{name}" id="name">
+        <input type="text" th:field="*{name}" id="name" required>
     </div>
 
     <div>
         <label for="price">Price:</label>
-        <input type="text" th:field="*{price}" id="price">
+        <input type="text" th:field="*{price}" id="price" required>
     </div>
 
     <div>
         <label for="description" >Description:</label>
-        <input type="text" th:field="*{description}" id="description">
+        <input type="text" th:field="*{description}" id="description" required>
     </div>
+
+<!--    <div>-->
+<!--        <label for="photo">Photo:</label>-->
+<!--        <input type="file" th:field="*{photo}" id="photo">-->
+<!--    </div>-->
+
     <button  type="submit">Create</button>
 </form>
+
 </body>
 </html>

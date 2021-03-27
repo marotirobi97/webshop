@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 @Controller
 public class ProductController {
@@ -19,14 +21,16 @@ public class ProductController {
 
     @GetMapping("/product/edit/{productId}")
     public String editProduct(@PathVariable("productId") Integer productId, Model model){
+
         Product selectedProduct = productRepository.findProductById(productId);
         model.addAttribute("product", selectedProduct);
 
-        return "edit_product";
+        return "admin/edit_product";
     }
 
     @GetMapping("/product/delete/{productId}")
     public String deleteProduct(@PathVariable("productId") Integer productId, Model model){
+
         Product selectedProduct = productRepository.findProductById(productId);
         productRepository.delete(selectedProduct);
 
@@ -35,14 +39,20 @@ public class ProductController {
 
     @PostMapping("/save-edited-product")
     public String saveEditedProduct(@ModelAttribute("product") Product product){
+
         productRepository.save(product);
+
         return "redirect:/list-products";
     }
 
     @PostMapping("/save-new-product")
-    public String saveNewProduct(@ModelAttribute("product") Product product){
+    public String saveNewProduct(@ModelAttribute("product") Product product, RedirectAttributes redirectAttributes){
+
         product.setStatus(Status.AVAILABLE.toString());
         productRepository.save(product);
+
+        redirectAttributes.addFlashAttribute("message","You have created a new product!");
+
         return "redirect:/create-product";
     }
 

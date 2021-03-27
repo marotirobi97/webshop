@@ -7,10 +7,10 @@ public enum Gender {
     MAN("Man"),
     WOMEN("Women");
 
-    private final String Gender;
+    private final String gender;
 
     public String getGender(){
-        return Gender;
+        return gender;
     }
 
 }

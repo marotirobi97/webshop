@@ -28,7 +28,9 @@ public class Product {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "image")
+    private byte[] image;
+
     @Column(name = "status")
     private String status = Status.AVAILABLE.toString();
-
 }

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+</head>
+<body>
+<form action="#" th:action="@{/logout}">
+    <input type="submit" value="Logout" />
+</form>
+<form action="#" th:action="@{/submit/order}" th:object="${order}" method="post">
+    <h3>Order list</h3>
+        <table>
+            <thead>
+            <tr>
+                <th> Name </th>
+                <th> Price </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(selectedProducts)}">
+                <td colspan="2"> No product selected yet</td>
+            </tr>
+            <tr th:each="product : ${selectedProducts}">
+                <td><span th:text="${product.name}">Name </span></td>
+                <td><span th:text="${product.price}">Price </span></td>
+                <td><a th:href="@{/delete/product/{productId}(productId=${product.id})}" >Delete </a></td>
+            </tr>
+            </tbody>
+        </table>
+        <input type="submit" id="createTeam" style="background-color:lightgreen;" value="Order">
+        <div role="alert" th:text="${successfulOrder}" th:if="${successfulOrder}"></div>
+</form>
+
+<table>
+    <br>
+    <br>
+    <thead>
+    <tr>
+        <th> Name </th>
+        <th> Price </th>
+        <th> Description </th>
+        <th> Image </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${#lists.isEmpty(availableProducts)}">
+        <td colspan="4"> No product available</td>
+    </tr>
+    <tr th:each="product : ${availableProducts}">
+        <td><span th:text="${product.name}" name="name">Name</span></td>
+        <td><span th:text="${product.price}" name="name">Price</span></td>
+        <td><span th:text="${product.description}" name="name">Description</span></td>
+        <!--        <td><img th:src="*{'data:image/png;base64,'+ product.image}"  alt="" width="130" height="80"/></td>-->
+        <td><img th:src="${product.image} == null ? @{/img/noimage2.png} : @{'data:image/png;base64,'+ product.image}" alt="" width="130" height="130"></td>
+        <td><a id="id" th:href="@{/select/product/{productId}(productId=${product.id})}">Select</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

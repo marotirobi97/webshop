@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function checkPasswordMatch() {
+        var password = $("#pass").val();
+        var confirmPassword = $("#pass2").val();
+
+        if(password.length != 0 || confirmPassword.length != 0){
+            if (password != confirmPassword){
+            $("#divCheckPasswordMatch").html("Passwords do not match!");
+            }
+            else{
+                $("#divCheckPasswordMatch").html("Passwords match.");
+            }
+
+            if(password.length < 5){
+                $("#divCheckPasswordLength").html("The password must be at least 5 characters in length");
+            }else{
+                $("#divCheckPasswordLength").html("");
+            }
+        }
+    }
+    $(document).ready(function () {
+       $("#pass,#pass2").keyup(checkPasswordMatch);
+    });
+</script>
+</head>
+<body>
+<button onclick="window.location.href='/index'">Back</button><br>
+
+
+<form action="#" th:action="@{/save/user}" th:object="${customer}" method="post">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" th:field="*{name}" required>
+    </div>
+
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" th:field="*{username}" required>
+    </div>
+
+    <div>
+        <label for="email">Email:</label>
+        <input type="text" th:field="*{email}" required>
+    </div>
+
+    <div>
+        <label for="password" >Password:</label>
+        <input type="password" th:field="*{password}" placeholder="password" id="pass" required>
+    </div>
+
+    <div>
+        <label for="confirmedPassword" >Confirm Password:</label>
+        <input type="password" th:field="*{confirmedPassword}" onChange="checkPasswordMatch();" placeholder="password again" id="pass2" required>
+    </div><br>
+    </div>
+        <div id="divCheckPasswordMatch">
+    </div>
+    </div>
+        <div id="divCheckPasswordLength">
+    </div><br>
+
+    <label for="gender">Gender:</label>
+    <select th:field="*{gender}" >
+        <option th:each="genderOpt : ${T(com.example.webshop.enums.Gender).values()}"
+                th:value="${genderOpt}" th:text="${genderOpt.gender}"></option>
+    </select><br><br>
+
+    <div>
+        <label for="phoneNumber">Phone number:</label>
+        <input type="text" th:field="*{phoneNumber}" required>
+    </div>
+    <button  type="submit">Create account</button>
+</form>
+<br>
+<div th:if="${errorMessage}">
+    <h2 th:text="${errorMessage}"/>
+</div><br>
+</body>
+</html>
