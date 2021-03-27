@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Base64;
+
 @Controller
 @SessionAttributes("imageDto")
 public class UploadImageController {
@@ -35,8 +37,6 @@ public class UploadImageController {
         Product product = productRepository.findProductById(productId);
         byte[] byteImage = imageFile.getBytes();
         product.setImage(byteImage);
-//        byte[] encodedImage = Base64.getEncoder().encode(imageFile.getBytes());
-//        product.setImage(encodedImage);
         redirectAttributes.addFlashAttribute("uploadedImageMessage","You have successfully uploaded an image.");
         productRepository.save(product);
 

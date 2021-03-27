@@ -24,8 +24,7 @@
         <td><span th:text="${product.name}" name="name">Name</span></td>
         <td><span th:text="${product.price}" name="name">Price</span></td>
         <td><span th:text="${product.description}" name="name">Description</span></td>
-<!--        <td><img th:src="*{'data:image/png;base64,'+ product.image}"  alt="" width="130" height="80"/></td>-->
-        <td><img th:src="${product.image} == null ? @{/img/noimage2.png} : @{'data:image/png;base64,'+ product.image}" alt="" width="130" height="130"></td>
+        <td><img th:src="${product.decodedImage} == null ? @{/img/noimage2.png} : @{'data:image/png;base64,'+${product.decodedImage}}" alt="" width="150" height="150"></td>
         <td><a th:href="@{/product/edit/{productId}(productId=${product.id})}">Edit</a></td>
         <td><a th:href="@{/upload/image/{productId}(productId=${product.id})}">Upload image</a></td>
         <td><a th:href="@{/product/delete/{productId}(productId=${product.id})}">Delete</a></td>

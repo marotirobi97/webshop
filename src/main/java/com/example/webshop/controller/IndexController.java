@@ -35,20 +35,20 @@ public class IndexController {
     }
 
     @GetMapping("/list-products")
-    public String navigateToListOfProducts(Model model,@ModelAttribute ProductDto productDto){
+    public String navigateToListOfProducts(Model model){
         List<Product> allAvailableProduct = productRepository.findAllAvailableProduct();
         List<ProductDto> all = new ArrayList<>();
         for(Product current : allAvailableProduct){
-            ProductDto dto = new ProductDto();
-            dto.setId(current.getId());
-            dto.setName(current.getName());                 //ez még nem jó
-            dto.setPrice(current.getPrice());
-            dto.setDescription(current.getDescription());
-            if(dto.getImage() != null){
-                byte[] decodedImage = Base64.getDecoder().decode(dto.getImage());
-                dto.setImage(decodedImage);
+            ProductDto productDto = new ProductDto();
+            productDto.setId(current.getId());
+            productDto.setName(current.getName());                 //ez még nem jó
+            productDto.setPrice(current.getPrice());
+            productDto.setDescription(current.getDescription());
+            if(current.getImage() != null){
+                String decodedImage = Base64.getEncoder().encodeToString(current.getImage());
+                productDto.setDecodedImage(decodedImage);
             }
-            all.add(dto);
+            all.add(productDto);
 
         }
         model.addAttribute("availableProducts",all);
