@@ -5,6 +5,7 @@ import com.example.webshop.dto.ProductDto;
 import com.example.webshop.entity.Customer;
 import com.example.webshop.entity.Product;
 import com.example.webshop.repository.ProductRepository;
+import com.example.webshop.service.OrderService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,9 @@ public class IndexController {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderService orderService;
     
     @GetMapping("/index")
     public String index(){
@@ -36,21 +40,7 @@ public class IndexController {
 
     @GetMapping("/list-products")
     public String navigateToListOfProducts(Model model){
-        List<Product> allAvailableProduct = productRepository.findAllAvailableProduct();
-        List<ProductDto> all = new ArrayList<>();
-        for(Product current : allAvailableProduct){
-            ProductDto productDto = new ProductDto();
-            productDto.setId(current.getId());
-            productDto.setName(current.getName());                 //ez még nem jó
-            productDto.setPrice(current.getPrice());
-            productDto.setDescription(current.getDescription());
-            if(current.getImage() != null){
-                String decodedImage = Base64.getEncoder().encodeToString(current.getImage());
-                productDto.setDecodedImage(decodedImage);
-            }
-            all.add(productDto);
-
-        }
+        List<ProductDto> all = orderService.getProductDtoList();
         model.addAttribute("availableProducts",all);
         return "admin/list_products";
     }

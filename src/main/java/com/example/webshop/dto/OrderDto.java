@@ -13,8 +13,8 @@ import java.util.List;
 @Data
 public class OrderDto {
 
-    private List<Product> selectedProducts = new ArrayList<>();
-    private List<Product> allAvailableProduct = new ArrayList<>();
+    private List<ProductDto> selectedProducts = new ArrayList<>();
+    private List<ProductDto> allAvailableProduct = new ArrayList<>();
 
     private Product product;
     private Customer customer;

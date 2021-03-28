@@ -6,9 +6,9 @@
     <title>Order</title>
 </head>
 <body>
-<form action="#" th:action="@{/logout}">
-    <input type="submit" value="Logout" />
-</form>
+
+<button onclick="window.location.href='/user/user-page'">Back</button><br>
+
 <form action="#" th:action="@{/submit/order}" th:object="${order}" method="post">
     <h3>Order list</h3>
         <table>
@@ -29,7 +29,7 @@
             </tr>
             </tbody>
         </table>
-        <input type="submit" id="createTeam" style="background-color:lightgreen;" value="Order">
+        <input type="submit" style="background-color:lightgreen;" value="Order">
         <div role="alert" th:text="${successfulOrder}" th:if="${successfulOrder}"></div>
 </form>
 
@@ -53,7 +53,7 @@
         <td><span th:text="${product.price}" name="name">Price</span></td>
         <td><span th:text="${product.description}" name="name">Description</span></td>
         <!--        <td><img th:src="*{'data:image/png;base64,'+ product.image}"  alt="" width="130" height="80"/></td>-->
-        <td><img th:src="${product.image} == null ? @{/img/noimage2.png} : @{'data:image/png;base64,'+ product.image}" alt="" width="130" height="130"></td>
+        <td><img th:src="${product.decodedImage} == null ? @{/img/noimage2.png} : @{'data:image/png;base64,'+${product.decodedImage}}" alt="" width="130" height="130"></td>
         <td><a id="id" th:href="@{/select/product/{productId}(productId=${product.id})}">Select</a></td>
     </tr>
     </tbody>

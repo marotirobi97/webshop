@@ -40,6 +40,6 @@ public class UploadImageController {
         redirectAttributes.addFlashAttribute("uploadedImageMessage","You have successfully uploaded an image.");
         productRepository.save(product);
 
-        return "redirect:/index";
+        return "redirect:/upload/image/" + productId ;
     }
 }

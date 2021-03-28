@@ -24,13 +24,9 @@
         <input type="text" th:field="*{description}" id="description" required>
     </div>
 
-<!--    <div>-->
-<!--        <label for="photo">Photo:</label>-->
-<!--        <input type="file" th:field="*{photo}" id="photo">-->
-<!--    </div>-->
-
     <button  type="submit">Create</button>
 </form>
+<div role="alert" th:text="${message}" th:if="${message}"></div>
 
 </body>
 </html>

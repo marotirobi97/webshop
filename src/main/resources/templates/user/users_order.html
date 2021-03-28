@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users's order</title>
+</head>
+<body>
+<button onclick="window.location.href='/user/user-page'">Back</button><br>
+<table>
+    <br>
+    <h2>
+        <span th:text="${customerName}" >Customer name</span>
+    </h2>
+    <h3>List of Order</h3>
+    <br>
+    <thead>
+    <tr>
+        <th> Product </th>
+        <th> Date </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${customerListOrders}">
+        <td><span th:text="${order.product.getName()}" name="name">Product</span></td>
+        <td><span th:text="${order.customer.getName()}" name="name">Product</span></td>
+        <td><span th:text="${#temporals.format(order.dateTime, 'dd-MM-yyyy HH:mm')}" name="name">Date</span></td>
+        <td><a th:href="@{/user/order/delete/{orderId}(orderId=${order.id})}">Delete order</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
