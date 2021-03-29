@@ -28,9 +28,6 @@ public class OrderController {
     private OrderService orderService;
 
     @Autowired
-    private CustomerRepository customerRepository;
-
-    @Autowired
     private ProductRepository productRepository;
 
     @Autowired
@@ -79,10 +76,8 @@ public class OrderController {
         if(loginDto.getUsername() == null || loginDto.getPassword() == null){
             return "redirect:/index";
         }
-        Customer customer = customerRepository.findCustomerByUsername(loginDto.getUsername());
-        List<Orders> customerListOrders = ordersRepository.findCustomerAllOrderById(customer.getId());
-        model.addAttribute("customerListOrders",customerListOrders);
-        model.addAttribute("customerName", customer.getName());
+        orderService.giveTheUsersOrderToTheFrontEnd(model, loginDto);
+
         return "user/users_order";
     }
 

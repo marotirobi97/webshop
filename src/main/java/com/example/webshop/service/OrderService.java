@@ -160,4 +160,11 @@ public class OrderService {
         }
         return all;
     }
+
+    public void giveTheUsersOrderToTheFrontEnd(Model model, LoginDto loginDto) {
+        Customer customer = customerRepository.findCustomerByUsername(loginDto.getUsername());
+        List<Orders> customerListOrders = ordersRepository.findCustomerAllOrderById(customer.getId());
+        model.addAttribute("customerListOrders",customerListOrders);
+        model.addAttribute("customerName", customer.getName());
+    }
 }
